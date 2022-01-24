@@ -70,26 +70,24 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import api from "../api/api";
 import Logo from "../components/Logo.vue";
 
 export default {
   name: "Home",
   components: { Logo },
-  data: () => ({
-    picked: null,
-    key: "D3C6D997-8CBE-42CA-81FC-EE56DA3F4418",
-    uid: "1d397054-792a-11ec-85d6-b2601fe30ff7",
-    func: "checkUID",
-    status: "1",
-    error: "false",
-    choice: "false",
-  }),
+  data() {
+    return {
+      picked: null,
+      key: "D3C6D997-8CBE-42CA-81FC-EE56DA3F4418",
+      uid: this.$route.params.uid,
+      func: "checkUID",
+      status: "1",
+      error: "false",
+      choice: "false",
+    };
+  },
   async created() {
-    this.choice = false; //Эту строку надо будет удалить, чтоб пользователь не мог отправлять 100 подтверждений
-    const uid = this.$route.params.uid;
-    this.uid = uid;
     const { data } = await api.fetchTrackingInfo(
       this.key,
       "checkUID",
@@ -158,7 +156,4 @@ export default {
   border: none;
   font-size: 24px;
 }
-/* .alert {
-  width: 100%;
-} */
 </style>
