@@ -18,8 +18,9 @@ export default {
   font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: $bg;
-  font-size: 24px;
+
+  font-size: 20px;
+  font-weight: 600;
 }
 .base {
   @include container();

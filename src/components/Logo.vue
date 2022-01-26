@@ -15,7 +15,6 @@ export default {
   padding: 0;
   margin: 0;
   align-items: left;
-  width: 100%;
 }
 .img {
   display: block;
