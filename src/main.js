@@ -3,11 +3,11 @@ import App from "./App.vue";
 import router from "./router";
 import axios from "axios";
 import VueAxios from "vue-axios";
-import { Alert } from "element-ui";
+import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
+import "@/assets/scss/index.scss";
 
-Vue.prototype.$Alert = { size: "small", zIndex: 3000 };
-Vue.use(Alert);
+Vue.use(ElementUI);
 
 Vue.config.productionTip = false;
 Vue.use(VueAxios, axios);

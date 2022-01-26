@@ -2,16 +2,26 @@
   <div class="main">
     <div class="header">
       <Logo />
+      <div class="phone">
+        <el-button
+          icon="el-icon-phone"
+          type="primary"
+          plain
+          circle
+          @click="open"
+        >
+        </el-button>
+      </div>
       <div class="back">
         <p>Номер замовлення:</p>
-        <br />
         <p>141</p>
+        <br />
         <p>15:00 21.01.2022p</p>
-        <p>300 м<sub>3</sub> по 100м<sub>3</sub>/год</p>
+        <p>300 м<sup>3</sup> по 100 м<sup>3</sup>/год</p>
       </div>
     </div>
     <div class="content">
-      <div v-if="!error">
+      <div v-if="error">
         <el-alert
           class="alert"
           title="Ошибка"
@@ -32,7 +42,7 @@
         >
         </el-alert>
       </div>
-      <div class="content" v-if="error && !choice">
+      <div class="content" v-if="!error && !choice">
         <form @submit="submit">
           <div>
             <label for="one" class="label">
@@ -103,6 +113,8 @@ export default {
       status: "1",
       error: "false",
       choice: "false",
+      telephone: "(044) 501-11-88",
+      email: "client@kovalska.com",
     };
   },
   async created() {
@@ -116,10 +128,28 @@ export default {
       this.error = true;
     }
   },
+
   methods: {
     submit() {
       api.fetchTrackingInfo(this.key, "confirm", this.uid, this.status);
       this.choice = true;
+    },
+    open() {
+      this.$alert(
+        `<strong> <a href="tel: +38${this.telephone}" class="tell"><i class="el-icon-phone"></i>${this.telephone}</a></strong>\n
+                 <strong><a href="mailto:${this.email}" class="mail"><i class="el-icon-message"></i>${this.email}</a></strong>`,
+        "Контакты",
+        {
+          dangerouslyUseHTMLString: true,
+          distinguishCancelAndClose: true,
+          showConfirmButton: false,
+          cancelButtonText: "Отмена",
+          showClose: true,
+          showCancelButton: true,
+          closeOnClickModal: true,
+          customClass: "modal-contact",
+        }
+      );
     },
   },
 };
@@ -127,6 +157,9 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/scss/_variables.scss";
 @import "../assets/scss/_reset.scss";
+.phone {
+  align-self: center;
+}
 .main {
   width: 100%;
 }
@@ -138,8 +171,10 @@ export default {
 }
 .back {
   color: #fff;
-  font-size: 12px;
+  font-size: 16px;
   padding: 20px;
+  text-align: right;
+  vertical-align: super;
 }
 .content {
   display: flex;
